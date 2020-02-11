@@ -101,6 +101,7 @@ export default class Models extends Component {
                 displayName={displayName}
                 modelName={name}
                 hideSelfOnExpand={true}
+                isRoot={true}
                 expanded={ defaultModelsExpandDepth > 0 && isShown }
                 >{content}</ModelCollapse>
               </div>

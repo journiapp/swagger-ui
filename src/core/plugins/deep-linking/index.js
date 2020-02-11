@@ -1,6 +1,7 @@
 import layout from "./layout"
 import OperationWrapper from "./operation-wrapper"
 import OperationTagWrapper from "./operation-tag-wrapper"
+import ModelLinkWrapper from "./model-link-wrapper"
 
 export default function() {
   return [layout, {
@@ -19,6 +20,7 @@ export default function() {
     wrapComponents: {
       operation: OperationWrapper,
       OperationTag: OperationTagWrapper,
+      ModelCollapse: ModelLinkWrapper
     },
   }]
 }

@@ -91,6 +91,7 @@ export const parseDeepLinkHash = (rawHash) => ({ layoutActions, layoutSelectors,
       }
 
       layoutActions.show(tagIsShownKey, true)
+
     }
 
     // If an `_` is present, trigger the legacy escaping behavior to be safe
@@ -109,7 +110,6 @@ export const parseDeepLinkHash = (rawHash) => ({ layoutActions, layoutSelectors,
 
 export const readyToScroll = (isShownKey, ref) => (system) => {
   const scrollToKey = system.layoutSelectors.getScrollToKey()
-
   if(Im.is(scrollToKey, fromJS(isShownKey))) {
     system.layoutActions.scrollToElement(ref)
     system.layoutActions.clearScrollTo()
@@ -176,7 +176,11 @@ export default {
           const [tag, operationId] = urlHashArray
           // We only put operations in the URL
           if(operationId) {
-            return ["operations", tag, operationId]
+            if (tag == 'models') {
+              return ["models", operationId]
+            } else {
+              return ["operations", tag, operationId]
+            }
           } else if (tag) {
             return ["operations-tag", tag]
           }
@@ -189,6 +193,8 @@ export default {
             return [tag, operationId]
           } else if (type == "operations-tag") {
             return [tag]
+          } else if (type == "models") {
+            return [type, tag]
           }
           return []
         },
